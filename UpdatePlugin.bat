@@ -9,4 +9,5 @@ if /I "%answer%"=="n" exit
 TASKKILL /IM Project64-MPN.exe /F
 powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Divaddd/project64-mpn/master/Plugin/GFX/GLideN64.dll', 'Plugin/GFX/GLideN64.dll')"
 powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/Divaddd/project64-mpn/master/Plugin/GFX/GLideN64.ini', 'Plugin/GFX/GLideN64.ini')"
+echo Your graphics plugin has been updated!
 pause
