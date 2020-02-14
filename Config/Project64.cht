@@ -247,6 +247,15 @@ Cheat30_O=
 Cheat31="Mechanics: Duel Partner Roulette Always Fast",800CD0B3 0000
 Cheat31_N=By: gamemasterplc.
 Cheat31_O=
+Cheat32="MGR: Coconut Conk: 25 Second Timer",D110B1E0 0384,8110B1E0 02EE
+Cheat32_N=By: Airsola.
+Cheat32_O=
+Cheat33="MGR: Boulder Ball: 25 Second Timer/Less Boulder Cooldown",D110977E 0384,8110977E 02EE,D110903E 24E5,81108FF6 0004
+Cheat33_N=By: gamemasterplc, Airsola.
+Cheat33_O=
+Cheat34="MG: Tidal Toss: No 3P Movement/Water Doesn't Push",D110AD62 A18C,8110AD20 0000,D1109998 4500,81109998 1000
+Cheat34_N=By: gamemasterplc, Rain.
+Cheat34_O=
 Name=Mario Party 3 (U)
 
 [FC800626-85C17FC3-C:45]
