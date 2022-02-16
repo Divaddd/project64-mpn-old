@@ -1,47 +1,38 @@
 @echo off
-echo ===============================================================================
-CertUtil -hashfile "Save\MarioParty.eep" | find /i "65 48 1e 55 45 00 de 10 ba f1 b2 7a a6 0b ce c2 4d 35 0e d1"
-if not errorlevel 1 (
-	echo Your Mario Party 1 save is correct!
-	goto CheckMp2
+title Mario Party Netplay Save Replacer
+fc /b "Config\Backup\MarioParty.eep" "Save\MarioParty.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Mario Party 1 save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Mario Party 1! && goto CheckMp2
 ) else (
-	set GCSLOTA="n"
-	set /p GCSLOTA=Your Mario Party 1 save has been changed. Replace? )
-	if /I "%GCSLOTA%"=="yes" goto ReplaceMp1
-	if /I "%GCSLOTA%"=="y" goto ReplaceMp1
-	if /I "%GCSLOTA%"=="no" goto CheckMp2
-	if /I "%GCSLOTA%"=="n" goto CheckMp2
+	goto CheckMp2
 )
 
+
 :ReplaceMp1
-copy /y Config\Backup\MarioParty.eep Save
-CertUtil -hashfile "Save\MarioParty.eep" | find /i "65 48 1e 55 45 00 de 10 ba f1 b2 7a a6 0b ce c2 4d 35 0e d1"
+copy /y "Config\Backup\MarioParty.eep" "Save\MarioParty.eep"
+fc /b "Config\Backup\MarioParty.eep" "Save\MarioParty.eep" > nul
 if not errorlevel 1 (
 	echo You now have the correct Mario Party 1 file!
 ) else (
-	color 4F
+	color 4Fs
 	echo There was an error replacing the Mario Party 1 file...
 	pause
 )
 
 :CheckMp2
-echo ===============================================================================
-CertUtil -hashfile "Save\MarioParty2.eep" | find /i "d9 c4 19 e6 4e b0 3b 49 d1 a6 46 d0 2f 1f 66 76 4e e0 17 fb"
-if not errorlevel 1 (
-	echo Your Mario Party 2 save is correct!
-	goto CheckMp3
+fc /b "Config\Backup\MarioParty2.eep" "Save\MarioParty2.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Mario Party 2 save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Mario Party 2! && goto CheckMp3
 ) else (
-	set GCSLOTB="n"
-	set /p GCSLOTB=Your Mario Party 2 save has been changed. Replace? )
-	if /I "%GCSLOTB%"=="yes" goto ReplaceMp2
-	if /I "%GCSLOTB%"=="y" goto ReplaceMp2
-	if /I "%GCSLOTB%"=="no" goto CheckMp3
-	if /I "%GCSLOTB%"=="n" goto CheckMp3
+	goto CheckMp3
 )
 
+
 :ReplaceMp2
-copy /y Config\Backup\MarioParty2.eep Save
-CertUtil -hashfile "Save\MarioParty2.eep" | find /i "d9 c4 19 e6 4e b0 3b 49 d1 a6 46 d0 2f 1f 66 76 4e e0 17 fb"
+copy /y "Config\Backup\MarioParty2.eep" "Save\MarioParty2.eep"
+fc /b "Config\Backup\MarioParty2.eep" "Save\MarioParty2.eep" > nul
 if not errorlevel 1 (
 	echo You now have the correct Mario Party 2 file!
 ) else (
@@ -51,23 +42,18 @@ if not errorlevel 1 (
 )
 
 :CheckMp3
-echo ===============================================================================
-CertUtil -hashfile "Save\MarioParty3.eep" | find /i "d8 f6 67 24 7e da eb 5c 1e 0d aa 38 a2 43 3f bf cd ba 73 81"
-if not errorlevel 1 (
-	echo Your Mario Party 3 save is correct!
-	goto CheckRest
+fc /b "Config\Backup\MarioParty3.eep" "Save\MarioParty3.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Mario Party 3 save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Mario Party 3! && goto CheckNmp
 ) else (
-	set WII="n"
-	set /p WII=Your Mario Party 3 save has been changed. Replace? )
-	if /I "%WII%"=="yes" goto ReplaceMp3
-	if /I "%WII%"=="y" goto ReplaceMp3
-	if /I "%WII%"=="no" goto CheckRest
-	if /I "%WII%"=="n" goto CheckRest
+	goto CheckNmp
 )
 
+
 :ReplaceMp3
-copy /y Config\Backup\MarioParty3.eep Save
-CertUtil -hashfile "Save\MarioParty3.eep" | find /i "d8 f6 67 24 7e da eb 5c 1e 0d aa 38 a2 43 3f bf cd ba 73 81"
+copy /y "Config\Backup\MarioParty3.eep" "Save\MarioParty3.eep"
+fc /b "Config\Backup\MarioParty3.eep" "Save\MarioParty3.eep" > nul
 if not errorlevel 1 (
 	echo You now have the correct Mario Party 3 file!
 ) else (
@@ -76,12 +62,217 @@ if not errorlevel 1 (
 	pause
 )
 
-:CheckRest
-echo ===============================================================================
-xcopy "Config\Backup\others" "Save" /s /y /e /q
-echo Your other N64 saves are correct!
-echo ===============================================================================
+
+:CheckNmp
+fc /b "Config\Backup\NewerMarioParty.eep" "Save\NewerMarioParty.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Newer Mario Party save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Newer Mario Party! && goto CheckMk64
+) else (
+	goto CheckMk64
+)
+
+
+:ReplaceNmp
+copy /y "Config\Backup\NewerMarioParty.eep" "Save\NewerMarioParty.eep"
+fc /b "Config\Backup\NewerMarioParty.eep" "Save\NewerMarioParty.eep" > nul
+if not errorlevel 1 (
+	echo You now have the correct Newer Mario Party file!
+) else (
+	color 4F
+	echo There was an error replacing the Newer Mario Party file...
+	pause
+)
+
+
+:CheckMk64
+fc /b "Config\Backup\MARIOKART64.eep" "Save\MARIOKART64.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Mario Kart 64 save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Mario Kart 64! && goto CheckDKR
+) else (
+	goto CheckDKR
+)
+
+
+:ReplaceMk64
+copy /y "Config\Backup\MARIOKART64.eep" "Save\MARIOKART64.eep"
+fc /b "Config\Backup\MARIOKART64.eep" "Save\MARIOKART64.eep" > nul
+if not errorlevel 1 (
+	echo You now have the correct Mario Kart 64 file!
+) else (
+	color 4F
+	echo There was an error replacing the Mario Kart 64 file...
+	pause
+)
+
+:CheckDKR
+fc /b "Config\Backup\Diddy Kong Racing.eep" "Save\Diddy Kong Racing.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Diddy Kong Racing save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Diddy Kong Racing! && goto CheckDK64
+) else (
+	goto CheckDK64
+)
+
+
+:ReplaceDKR
+copy /y "Config\Backup\Diddy Kong Racing.eep" "Save\Diddy Kong Racing.eep"
+fc /b "Config\Backup\Diddy Kong Racing.eep" "Save\Diddy Kong Racing.eep" > nul
+if not errorlevel 1 (
+	echo You now have the correct Diddy Kong Racing file!
+) else (
+	color 4F
+	echo There was an error replacing the Diddy Kong Racing file...
+	pause
+)
+
+:CheckDK64
+fc /b "Config\Backup\DONKEY KONG 64.eep" "Save\DONKEY KONG 64.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Donkey Kong 64 save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Donkey Kong 64! && goto CheckDM64
+) else (
+	goto CheckDM64
+)
+
+
+:ReplaceDK64
+copy /y "Config\Backup\DONKEY KONG 64.eep" "Save\DONKEY KONG 64.eep"
+fc /b "Config\Backup\DONKEY KONG 64.eep" "Save\DONKEY KONG 64.eep" > nul
+if not errorlevel 1 (
+	echo You now have the correct Donkey Kong 64 file!
+) else (
+	color 4F
+	echo There was an error replacing the Donkey Kong 64 file...
+	pause
+)
+
+:CheckDM64
+fc /b "Config\Backup\DR.MARIO 64.eep" "Save\DR.MARIO 64.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Dr. Mario 64 save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Dr. Mario 64! && goto CheckMGOL
+) else (
+	goto CheckMGOL
+)
+
+
+:ReplaceDM64
+copy /y "Config\Backup\DR.MARIO 64.eep" "Save\DR.MARIO 64.eep"
+fc /b "Config\Backup\DR.MARIO 64.eep" "Save\DR.MARIO 64.eep" > nul
+if not errorlevel 1 (
+	echo You now have the correct Dr. Mario 64 file!
+) else (
+	color 4F
+	echo There was an error replacing the Dr. Mario 64 file...
+	pause
+)
+
+:CheckMGOL
+fc /b "Config\Backup\MarioGolf64.sra" "Save\MarioGolf64.sra" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Mario Golf save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Mario Golf! && goto CheckMT
+) else (
+	goto CheckMT
+)
+
+
+:ReplaceMGOL
+copy /y "Config\Backup\MarioGolf64.sra" "Save\MarioGolf64.sra"
+fc /b "Config\Backup\MarioGolf64.sra" "Save\MarioGolf64.sra" > nul
+if not errorlevel 1 (
+	echo You now have the correct Mario Golf file!
+) else (
+	color 4F
+	echo There was an error replacing the Mario Golf file...
+	pause
+)
+
+
+:CheckMT
+fc /b "Config\Backup\MarioTennis.eep" "Save\MarioTennis.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Mario Tennis save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Mario Tennis! && goto CheckSSB
+) else (
+	goto CheckSSB
+)
+
+:ReplaceMT
+copy /y "Config\Backup\MarioTennis.eep" "Save\MarioTennis.eep"
+fc /b "Config\Backup\MarioTennis.eep" "Save\MarioTennis.eep" > nul
+if not errorlevel 1 (
+	echo You now have the correct Mario Tennis file!
+) else (
+	color 4F
+	echo There was an error replacing the Mario Tennis file...
+	pause
+)
+
+:CheckSSB
+fc /b "Config\Backup\SMASH BROTHERS.sra" "Save\SMASH BROTHERS.sra" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Super Smash Bros. save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Super Smash Bros! && goto CheckSF64
+) else (
+	goto CheckSF64
+)
+
+:ReplaceSSB
+copy /y "Config\Backup\SMASH BROTHERS.sra" "Save\SMASH BROTHERS.sra"
+fc /b "Config\Backup\SMASH BROTHERS.sra" "Save\SMASH BROTHERS.sra" > nul
+if not errorlevel 1 (
+	echo You now have the correct Super Smash Bros. file!
+) else (
+	color 4F
+	echo There was an error replacing the Super Smash Bros. file...
+	pause
+)
+
+:CheckSF64
+fc /b "Config\Backup\STARFOX64.eep" "Save\STARFOX64.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Starfox 64 save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Starfox 64! && goto CheckBm64
+) else (
+	goto CheckBm64
+)
+
+:ReplaceSF64
+copy /y "Config\Backup\STARFOX64.eep" "Save\STARFOX64.eep"
+fc /b "Config\Backup\STARFOX64.eep" "Save\STARFOX64.eep" > nul
+if not errorlevel 1 (
+	echo You now have the correct Starfox 64 file!
+) else (
+	color 4F
+	echo There was an error replacing the Starfox 64 file...
+	pause
+)
+
+:CheckBm64
+fc /b "Config\Backup\BOMBERMAN64U.eep" "Save\BOMBERMAN64U.eep" > nul
+if errorlevel 1 (
+	choice /c YN /m "Your Bomberman 64 save has been changed. Replace?"
+	if errorlevel 2 echo Skipping Bomberman 64! && goto CheckEnd
+) else (
+	goto CheckEnd
+)
+
+:ReplaceBm64
+copy /y "Config\Backup\BOMBERMAN64U.eep" "Save\BOMBERMAN64U.eep"
+fc /b "Config\Backup\BOMBERMAN64U.eep" "Save\BOMBERMAN64U.eep" > nul
+if not errorlevel 1 (
+	echo You now have the correct Bomberman 64 file!
+) else (
+	color 4F
+	echo There was an error replacing the Bomberman 64 file...
+	pause
+)
+
+:CheckEnd
 color 2F
-echo The check is done!
+echo Done
 pause
 exit
